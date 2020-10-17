@@ -1,0 +1,67 @@
+{
+  "name": "@ehosick/config-source-yaml",
+  "version": "1.0.0",
+  "description": "Enable config-core configuration and settings to load from yaml files.",
+  "author": {
+    "name": "Eric Hosick",
+    "email": "erichosick@gmail.com",
+    "url": "https://www.erichosick.com"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "configuration",
+    "settings",
+    "config core",
+    "YAML source"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erichosick/config-source-yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erichosick/config-core/issues"
+  },
+  "scripts": {
+    "test": "nyc mocha",
+    "build": "tsc",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov",
+    "version": "git add package.json && lerna version $npm_package_version --amend --no-push --no-git-tag-version --yes && git add -u"
+  },
+  "prettier": {
+    "docs": "https://prettier.io/docs/en/options.html",
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "printWidth": 100
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/chai-as-promised": "^7.1.3",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^14.11.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "codecov": "^3.7.2",
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@ehosick/config-core-types": "^1.*.*",
+    "@types/js-yaml": "^3.12.5",
+    "js-yaml": "^3.14.0"
+  }
+}
