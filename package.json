@@ -1,6 +1,6 @@
 {
   "name": "@ehosick/config-source-yaml",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Enable config-core configuration and settings to load from yaml files.",
   "author": {
     "name": "Eric Hosick",
