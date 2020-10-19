@@ -8,8 +8,9 @@ import { IConfigSource, ISourceType } from '@ehosick/config-core-types';
  * Supported file types are: .json, .ts.
  * NOTE: .yml and others will be moved to their own libraries.
  */
-export class YamlSource implements IConfigSource {
+export default class YamlSource implements IConfigSource {
   #fileAbsolutePath: string;
+
   #rootOffset: string;
 
   /**
@@ -30,7 +31,7 @@ export class YamlSource implements IConfigSource {
    *
    * @throws An error if file extension is not provided or file name is invalid.
    */
-  private static _fileExtension(fileAbsolutePath: string): string {
+  private static fileExtension(fileAbsolutePath: string): string {
     const fnSplit = fileAbsolutePath.split('.');
     if (fnSplit.length <= 1) {
       throw new Error(`File '${fileAbsolutePath}' is not a valid or is missing a file extension`);
@@ -49,7 +50,7 @@ export class YamlSource implements IConfigSource {
     return new Promise<ISourceType>((resolve, reject) => {
       let fileExtension;
       try {
-        fileExtension = YamlSource._fileExtension(this.#fileAbsolutePath);
+        fileExtension = YamlSource.fileExtension(this.#fileAbsolutePath);
       } catch (exception) {
         reject(exception);
       }
@@ -57,26 +58,27 @@ export class YamlSource implements IConfigSource {
       let data;
 
       switch (fileExtension) {
-        case 'yaml':
+        case 'yaml': {
           const bufferData = fs.readFileSync(this.#fileAbsolutePath, 'utf8');
           if (bufferData.length === 0) {
             data = {};
           } else {
             try {
-              data = yaml.safeLoad(bufferData, {json: true});
+              data = yaml.safeLoad(bufferData, { json: true });
             } catch (err) {
               reject(Error(`${this.#fileAbsolutePath}: ${err.message}`));
             }
           }
           break;
+        }
         default:
           reject(Error(`File extension '${fileExtension}' not supported`));
       }
 
       if (this.#rootOffset !== '') {
-        let newData = {};
+        const newData = {};
         let curData = newData;
-        let properties = this.#rootOffset.split('.');
+        const properties = this.#rootOffset.split('.');
         properties.forEach((propName, index) => {
           curData[propName] = properties.length === index + 1 ? data : {};
           curData = curData[propName];

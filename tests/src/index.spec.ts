@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { YamlSource } from '../../src/index';
+import YamlSource from '../../src/index';
 
-const expect = chai.expect;
+const { expect } = chai;
 chai.use(chaiAsPromised);
 
 describe('yamlsource', () => {
@@ -23,7 +23,7 @@ describe('yamlsource', () => {
       const fileName = `${__dirname}/test-files/yaml-source/file.noext`;
       const yamlSource = new YamlSource(fileName);
       await expect(yamlSource.loadConfig()).to.be.rejectedWith(
-        `File extension 'noext' not supported`,
+        "File extension 'noext' not supported",
       );
     });
 
@@ -38,7 +38,7 @@ describe('yamlsource', () => {
     it('should exception when an empty file name is provided', async () => {
       const yamlSource = new YamlSource('');
       await expect(yamlSource.loadConfig()).to.be.rejectedWith(
-        `File '' is not a valid or is missing a file extension`,
+        "File '' is not a valid or is missing a file extension",
       );
     });
   });
@@ -84,7 +84,7 @@ describe('yamlsource', () => {
       });
     });
 
-    it(`should not care if the rootOffset is empty string ('')`, async () => {
+    it("should not care if the rootOffset is empty string ('')", async () => {
       const sourceType = await new YamlSource(
         `${__dirname}/test-files/yaml-source/valid-01.yaml`,
         '',
